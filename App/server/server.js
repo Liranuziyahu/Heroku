@@ -24,12 +24,11 @@ app.use(express.json())
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('build'))
     app.get('*',(req,res) =>{
-        req.sendFile(path.resolve(__dirname , './../client/queezer/build' , 'index.html'))
+        req.sendFile(path.resolve(__dirname , 'build' , 'liran.html'))
     })
 }
 
 app.get('/' , (req,res) => res.json({message:"Welcome to mk application."}))
-
 require('./routes/user.js')(app)
 require('./routes/exam.js')(app)
 require('./routes/question.js')(app)
