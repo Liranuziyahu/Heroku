@@ -1,11 +1,11 @@
 {
-  "name": "app",
+  "name": "queezer",
   "version": "1.0.0",
-  "description": "",
+  "description": "queezer",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "nodejs",
@@ -19,6 +19,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "env": "^0.0.2",
     "express": "^4.17.3",
     "fs": "^0.0.1-security",
     "handlebars": "^4.7.7",
