@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: true}))
 // try to load the index.js file
 
 const db = require('./models')
-db.sequelize
+db.sequelize.sync()
 
 app.use(cors({origin:'*'}))
 
