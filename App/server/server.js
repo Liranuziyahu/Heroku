@@ -3,6 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 
+app.use(cors({origin:'*'}))
 
 // parse request of content - type - application/x-www-from-urlencoded
 app.use(express.urlencoded({extended: true}))
@@ -13,9 +14,9 @@ app.use(express.urlencoded({extended: true}))
 // try to load the index.js file
 
 const db = require('./models')
-db.sequelize.sync()
-
-app.use(cors({origin:'*'}))
+db.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync db.");
+  });
 
 app.use(express.json())
 

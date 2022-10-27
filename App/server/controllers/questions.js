@@ -1,6 +1,6 @@
 const db = require('./../models')
 const Question = db.questions
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 //Create Question object    
 exports.create = (req , res) =>{

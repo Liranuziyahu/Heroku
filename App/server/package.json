@@ -4,7 +4,7 @@
   "description": "queezer",
   "main": "server.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -23,10 +23,11 @@
     "express": "^4.17.3",
     "fs": "^0.0.1-security",
     "handlebars": "^4.7.7",
+    "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.7",
     "nodemon": "^2.0.15",
-    "sequelize": "^6.18.0",
+    "sequelize": "^6.25.3",
     "util": "^0.12.4"
   }
 }

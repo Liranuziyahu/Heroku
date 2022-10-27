@@ -1,6 +1,6 @@
 const db = require('./../models')
 const Exam = db.exams
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 //for send Email
 const fs = require('fs');
