@@ -14,9 +14,7 @@ app.use(express.urlencoded({extended: true}))
 // try to load the index.js file
 
 const db = require('./models')
-db.sequelize.sync({ force: true }).then(() => {
-    console.log("Drop and re-sync db.");
-  });
+db.sequelize.sync();
 
 app.use(express.json())
 

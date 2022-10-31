@@ -1,8 +1,8 @@
 module.exports ={
-    HOST: '127.0.0.1',
-    USER: 'root',
-    PASSWORD: '318866175Kk',
-    DB: 'crm_interview',
+    HOST: 'eu-cdbr-west-03.cleardb.net',
+    USER: 'b404883b085267',
+    PASSWORD: '274ea4d2',
+    DB: 'heroku_6edf401c8513f78',
     dialect: 'mysql',
     PORT: 3306,
     pool:{
