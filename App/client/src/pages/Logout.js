@@ -1,6 +1,6 @@
 import React from 'react'
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
+import {Link} from 'react-router-dom'
 const Logout = () => {
 
 const Logout = (()=>{ 
@@ -10,7 +10,10 @@ const Logout = (()=>{
 })
 
   return (
-    <ExitToAppIcon style={{position:"absolute" , right:20 ,top:20 }} onClick={()=>Logout()}></ExitToAppIcon>
+    
+          <ExitToAppIcon style={{position:"absolute" , right:20 ,top:20}} onClick={()=>Logout()}>
+            <Link to ='/'></Link>
+          </ExitToAppIcon>
   )
 }
 

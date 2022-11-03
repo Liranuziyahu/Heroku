@@ -16,7 +16,6 @@ const categoryName = props.name
 const controlDiagram = props?.type
 
 const isMobile = props.isMobile
-console.log(isMobile)
 useEffect(()=>{
 
         let scoreNot_Start = props.value?.filter?.(exam => exam.done == 0 )

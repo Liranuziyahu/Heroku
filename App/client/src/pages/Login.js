@@ -3,18 +3,22 @@ import axios from 'axios';
 import {Link} from 'react-router-dom'
 import {useNavigate} from "react-router-dom";
 import {myContextData} from '../context/ContextDataFromServer'
+import {ContextFromServer} from '../context/index'
+
 //CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form,Button } from 'react-bootstrap';
 
 const Login = () => {
-    const {setDataUserLogged ,setIsAuth} =  useContext(myContextData)
+    const {setDataUserLogged ,setIsAuth } =  useContext(myContextData)
+    const {API} =  useContext(ContextFromServer)
+
     const [loginMessage , setLoginMessage] = useState('')
     let navigate = useNavigate();
 
     const checkAuto = (autoLogin) => {
         autoLogin.preventDefault()
-        axios.post('http://localhost:8080/users/login',{email:autoLogin.target[0].value , password:autoLogin.target[1].value})
+        axios.post(API+'users/login',{email:autoLogin.target[0].value , password:autoLogin.target[1].value})
         .then(user => {
             if(!user.data)
            {

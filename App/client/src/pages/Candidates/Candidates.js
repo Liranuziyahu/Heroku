@@ -11,6 +11,7 @@ import axios from 'axios';
 import { makeStyles } from '@mui/styles';
 
 function Candidates({exam}) {
+    const {API} =  useContext(ContextFromServer)
 
     const useStyles = makeStyles( () => ({
         list: {
@@ -25,7 +26,7 @@ function Candidates({exam}) {
     const senderMail = async  (id ) => {
         let answers = await AnswersByExamID(id)
         try{
-            axios.post('http://localhost:8080/exams/send-exam',{"answers": answers ,"to": exam.userEmail})
+            axios.post(API+'exams/send-exam',{"answers": answers ,"to": exam.userEmail})
         }
         catch(err){ console.error(err)}
     }

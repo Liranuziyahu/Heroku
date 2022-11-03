@@ -4,17 +4,20 @@ import Diagram from './Diagram'
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+    import {ContextFromServer} from './../../context/index'
 
 const DiagramDishboard = () => {
 const [examJS , setExamJS] = useState([])     
 const [examRact , setExamRact] = useState([])
 const [examAngular , setExamAngular] = useState([])
-
 const theme = useTheme();
 const isMobile = useMediaQuery(theme.breakpoints.down('lg'));
 
+const {API} =  useContext(ContextFromServer)
+
+
     useEffect(async () => {
-        await axios.get(`http://localhost:8080/exams`)
+        await axios.get(API+`exams`)
         .then(data => {
             // console.log(data.data)
             let x = data.data.filter(exam => exam.categoryExamsName == 'JS')
