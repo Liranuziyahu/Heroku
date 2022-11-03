@@ -14,7 +14,7 @@ const Login = () => {
 
     const checkAuto = (autoLogin) => {
         autoLogin.preventDefault()
-        axios.post('http://localhost:8080/user/login',{email:autoLogin.target[0].value , password:autoLogin.target[1].value})
+        axios.post('http://localhost:8080/users/login',{email:autoLogin.target[0].value , password:autoLogin.target[1].value})
         .then(user => {
             if(!user.data)
            {
@@ -28,7 +28,7 @@ const Login = () => {
             navigate(`${path}`)
            }
         })
-        .catch(err =>console.log('Email or password not true'))
+        .catch(err => console.log(err))
 
     //For Hosting Services
         if(autoLogin.target[0].value=='host@gmail.com' && autoLogin.target[1].value=='myhost')

@@ -1,4 +1,4 @@
-const db = require('./../models')
+const db = require('../models')
 const User = db.users
 const bcrypt = require('bcrypt');
 
@@ -33,7 +33,7 @@ const bcrypt = require('bcrypt');
                     }
                     catch(err){
                         console.error(error);
-                        res.status(500).send();
+                        res.status(500).send({massage:err.massage});
                     }
                 }
                 else{
@@ -46,7 +46,7 @@ const bcrypt = require('bcrypt');
 
 //Retarive All USERS FROM DB
     exports.findAll = (req,res) => {
-         db.sequelize.query('SELECT userID , userName , userEmail , userPassword , role.roleName FROM users INNER JOIN role ON users.roleID = role.roleID')
+         db.sequelize.query('SELECT userID , userName , userEmail , userPassword , roles.roleName FROM users INNER JOIN roles ON users.roleID = roles.roleID')
         .then( data => res.send(data[0]))
         .catch(err => res.status(500).send({massage: err.message || "Some error occurred while retrieving the User."}))
     }
@@ -66,7 +66,6 @@ const bcrypt = require('bcrypt');
 
 //Retrive if the Email exists
     exports.findEmail = (req , res) =>{
-        console.log("HERE1")
         const email = req.body.userEmail
         User.findOne({where:{userEmail: email}})
         .then(data => {
@@ -124,13 +123,38 @@ const bcrypt = require('bcrypt');
         })
     }
 //Login
-    exports.login = async (req , res) =>{
-        console.log('Start HERE' , req.body.email)
-        const user = await User.findOne({where: {userEmail:req.body.email}})
-        try{
-            let match = await bcrypt.compare(req.body.password, user.userPassword)
-            if(match) res.status(200).send(user)
-            else res.status(200).send(false)
+exports.login =  (req , res) =>{
+    User.findOne({where: {userEmail:req.body.email}})
+    .then(user =>  
+        {
+            if(user)
+            {
+                bcrypt.compare(req.body.password, user.userPassword)
+                .then(data => {
+                    res.status(200).send(user)
+                })
+                .catch(err => res.status(500).send({error:err.message}))
+            }
+            else{
+                res.status(204).send(true)
+            }
         }
-        catch{err => console.log(err)}
-     }
+    )
+    .catch(err => res.status(500).send('Not Found'))
+
+
+    // try{
+    //     // try{
+    //     //     if(match) 
+    //     //         res.status(200).send(user)
+    //     //     else 
+    //     //         res.status(200).send(false)
+    //     // }
+    //     // catch{
+    //     //     res.status(500).send({message:'bcryptjs compare fall'});
+    //     // } 
+    // }
+    // catch{
+    //     res.status(500).send({message:'err.message2'});
+    // }  
+ }

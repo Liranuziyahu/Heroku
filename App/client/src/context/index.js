@@ -18,13 +18,13 @@ const ContextServer = ({children}) => {
   const navigate = useNavigate();
 
   useEffect(async () =>{
-    await axios.get(`http://localhost:8080/user`).then(data => setAllUsers(data.data))
-    await axios.get(`http://localhost:8080/exams`).then(data => setExams(data.data))
+    await axios.get(`http://localhost:8080/users`).then(data => setAllUsers(data?.data))
+    await axios.get(`http://localhost:8080/exams`).then(data => setExams(data?.data))
     await axios.get(`http://localhost:8080/questions`)
     .then(data => {
-      setQuestionsJS(data.data.filter(question => question.categoryExamsName == 'JS'))
-      setQuestionsReact(data.data.filter(question => question.categoryExamsName == 'React'))
-      setQuestionsAngular(data.data.filter(question => question.categoryExamsName == 'Angular'))
+      setQuestionsJS(data?.data.filter(question => question.categoryExamsName == 'JS'))
+      setQuestionsReact(data?.data.filter(question => question.categoryExamsName == 'React'))
+      setQuestionsAngular(data?.data.filter(question => question.categoryExamsName == 'Angular'))
     })
   },[updateContext])
 
@@ -44,7 +44,7 @@ const ContextServer = ({children}) => {
   //Create
   const createUser = (async (user , categorys)=>{
 
-    await axios.post('http://localhost:8080/user',user)
+    await axios.post('http://localhost:8080/users',user)
     .then(res => {
       if(res.data.message!= undefined) 
         alert(res.data.message)
@@ -60,9 +60,9 @@ const ContextServer = ({children}) => {
     .catch(err => err)
   })
   //Edit
-  const editUser = (user => axios.put(`http://localhost:8080/user/${user.userID}`,user))
+  const editUser = (user => axios.put(`http://localhost:8080/users/${user.userID}`,user))
   //Delete 
-  const deleteUser = (async userID => await axios.delete(`http://localhost:8080/user/${userID}`))
+  const deleteUser = (async userID => await axios.delete(`http://localhost:8080/users/${userID}`))
 
 /////////Exam/////////
   //Create

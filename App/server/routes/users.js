@@ -1,5 +1,5 @@
 module.exports = app => { 
-    const users = require('./../controllers/user')
+    const users = require('../controllers/users')
     let router = require("express").Router();
 //Login
     router.post('/login',users.login)
@@ -14,5 +14,5 @@ module.exports = app => {
 // //Delete a User with id
     router.delete("/:id",users.delete)
 
-    app.use('/user',router)
+    app.use('/users',router)
 }

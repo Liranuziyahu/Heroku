@@ -29,7 +29,7 @@ const UserAnswer = db.user_answers
 //Get All Answer by examID
     exports.answersExam = (req ,res) =>{
         const id = req.params.id;
-            db.sequelize.query(`SELECT exams.examsID , questions.*,user_answers.userAnswer FROM crm_interview.user_answers inner join questions on questions.questionID = user_answers.questionID inner join exams ON user_answers.examsID = exams.examsID where exams.examsID = ${id}`)
+            db.sequelize.query(`SELECT exams.examsID , questions.*,user_answers.userAnswer FROM user_answers inner join questions on questions.questionID = user_answers.questionID inner join exams ON user_answers.examsID = exams.examsID where exams.examsID = ${id}`)
             .then(data => {
                 if(data[0].length == 0)
                 res.status(200).send({message:"Not exist answer yet in exam"})
@@ -43,7 +43,7 @@ const UserAnswer = db.user_answers
     exports.DeleteByID = (req ,res) =>{
         const id = req.params.id;
         let num = 0;
-        db.sequelize.query(`SELECT exams.examsID ,exams.userID, questions.*,user_answers.userAnswer FROM crm_interview.user_answers inner join questions on questions.questionID = user_answers.questionID inner join exams ON user_answers.examsID = exams.examsID where exams.userID = ${id}`)
+        db.sequelize.query(`SELECT exams.examsID ,exams.userID, questions.*,user_answers.userAnswer FROM user_answers inner join questions on questions.questionID = user_answers.questionID inner join exams ON user_answers.examsID = exams.examsID where exams.userID = ${id}`)
         .then(data => {
             data[0].map(answer => {
                 UserAnswer.destroy({where:{examsID:answer.examsID}})

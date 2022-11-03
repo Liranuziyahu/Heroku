@@ -20,15 +20,9 @@ const TabelCandidates = () => {
     const [userSearch ,setUserSearch] = useState({search:"" , catagorey:""})
     const [page, setPage] = useState(1);
 
-    // exams?.sort?.((exam1 , exam2)=>{
-    //   return exam1.userID - exam2.userID
-    // })
-
     const handleChange = (event, value) => {
       setPage(value);
     };
-
-
 
     return (
       <div style={{overflowX: 'hidden'}}>
