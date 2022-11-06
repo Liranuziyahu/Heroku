@@ -7,13 +7,11 @@ const LogoutButton = (()=>{
 
     window.localStorage.removeItem('currentUser');
     window.location.reload();
+    window.location.replace('/')
 })
 
   return (
-    
-          <ExitToAppIcon style={{position:"absolute" , right:20 ,top:20}} onClick={()=>LogoutButton()}>
-            <Link to ='/'></Link>
-          </ExitToAppIcon>
+      <ExitToAppIcon style={{position:"absolute" , right:20 ,top:20}} onClick={()=>LogoutButton()}></ExitToAppIcon>
   )
 }
 

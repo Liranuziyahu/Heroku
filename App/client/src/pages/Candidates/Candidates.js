@@ -38,7 +38,7 @@ function Candidates({exam}) {
             <TableCell className={styles.list}>{exam?.userEmail}</TableCell>
             <TableCell className={styles.list}>{exam?.categoryExamsName}</TableCell>
             <TableCell className={styles.list}>{exam?.score}</TableCell>
-            <TableCell  sx={{display:'flex',justifyContent: 'center'}}>
+            <TableCell className={styles.list} sx={{display:'flex',justifyContent: 'center'}}>
                  <Link to ={`${exam?.examsID}`}  state={{ data: exam }}><FileOpenIcon  color="action"/></Link>
                  {
                     exam?.sent == 0 ? <EmailIcon onClick={() => senderMail(exam.examsID)} color="action"/> : <MarkEmailReadIcon color="action"/>
