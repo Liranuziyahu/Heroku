@@ -16,6 +16,8 @@ const ContextServer = ({children}) => {
   const [categoryExam , setCategoryExam] = useState([])
   const [updateContext , setUpdateContext] = useState(false)
   const API = 'https://queezer.herokuapp.com/'
+  // const API = 'http://localhost:8080/'
+
   const navigate = useNavigate();
 
   useEffect(async () =>{

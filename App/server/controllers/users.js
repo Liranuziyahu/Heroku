@@ -52,7 +52,7 @@ const bcrypt = require('bcrypt');
     }
 
 //Retrive USER by ID
-    exports.findOne =  (req, res) => {
+    exports.findOneUser =  (req, res) => {
         const id = req.params.id;
          User.findOne({where: {userID:id}})
         .then( data => {
@@ -79,7 +79,6 @@ const bcrypt = require('bcrypt');
 
 //Update USER by ID
     exports.update = async (req,res) => {
-        console.log(req.body)
         const id = req.params.id
 
         if(req.body.userPassword.trim() != '')  
@@ -124,9 +123,11 @@ const bcrypt = require('bcrypt');
     }
 //Login
 exports.login =  (req , res) =>{
+    console.log(req.body);
     User.findOne({where: {userEmail:req.body.email}})
     .then(user =>  
         {
+            console.log(user);
             if(user)
             {
                 bcrypt.compare(req.body.password, user.userPassword)
@@ -136,25 +137,9 @@ exports.login =  (req , res) =>{
                 .catch(err => res.status(500).send({error:err.message}))
             }
             else{
-                res.status(204).send(true)
+                res.status(200).send('Not Found')
             }
         }
     )
-    .catch(err => res.status(500).send('Not Found'))
-
-
-    // try{
-    //     // try{
-    //     //     if(match) 
-    //     //         res.status(200).send(user)
-    //     //     else 
-    //     //         res.status(200).send(false)
-    //     // }
-    //     // catch{
-    //     //     res.status(500).send({message:'bcryptjs compare fall'});
-    //     // } 
-    // }
-    // catch{
-    //     res.status(500).send({message:'err.message2'});
-    // }  
+    .catch(err => res.status(200).send('Not Found'))
  }

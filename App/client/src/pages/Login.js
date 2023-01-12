@@ -23,6 +23,8 @@ const Login = () => {
             if(!user.data)
            {
             setLoginMessage('Password Worng')
+            console.log("user" , user);
+
            }
            else {
             setDataUserLogged(user.data)

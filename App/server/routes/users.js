@@ -8,7 +8,7 @@ module.exports = app => {
 //Retrieve all User
     router.get("/",users.findAll)
 //Retrieve a single User with id
-    router.get("/:id",users.findOne)
+    router.get("/:id",users.findOneUser)
 // //update a User with id
     router.put("/:id",users.update)
 // //Delete a User with id
