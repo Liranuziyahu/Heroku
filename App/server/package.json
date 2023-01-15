@@ -17,7 +17,8 @@
   "author": "Liran Uziyahu",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "argon2": "^0.30.3",
+    "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "env": "^0.0.2",
     "express": "^4.17.3",
@@ -26,8 +27,8 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.7",
-    "nodemon": "^2.0.15",
-    "sequelize": "^6.25.3",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.28.0",
     "util": "^0.12.4"
   }
 }

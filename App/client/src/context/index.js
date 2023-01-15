@@ -15,8 +15,8 @@ const ContextServer = ({children}) => {
   const [questionsAngular , setQuestionsAngular] = useState([])
   const [categoryExam , setCategoryExam] = useState([])
   const [updateContext , setUpdateContext] = useState(false)
-  const API = 'https://queezer.herokuapp.com/'
-  // const API = 'http://localhost:8080/'
+  // const API = 'https://queezer.herokuapp.com/'
+  const API = 'http://localhost:8080/'
 
   const navigate = useNavigate();
 
@@ -116,7 +116,6 @@ const ContextServer = ({children}) => {
        setCategoryExam(sliceArr)
     }
 }
-
   return (
     <div>
         <ContextFromServer.Provider value={{API ,user , setUser ,createUser,deleteUser,allUsers,setAllUsers ,setUpdateContext,updateContext,exams , questionsJS , questionsReact , questionsAngular ,editUser ,createQuestion ,editExam , createExam , updateExams , checkCategory , categoryExam ,CreateAnswersExam,DeleteAllExams,DeleteAnswersByID,AnswersByExamID}}>

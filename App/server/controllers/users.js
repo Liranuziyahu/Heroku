@@ -1,6 +1,8 @@
 const db = require('../models')
 const User = db.users
 const bcrypt = require('bcrypt');
+const argon2 = require('argon2');
+const { Argon2 } = require('argon2');
 
 //Create USER
     exports.create = async (req ,res) => {
@@ -19,7 +21,7 @@ const bcrypt = require('bcrypt');
             {
                 if(req.body.userPassword.trim() != '')  
                 {
-                    const hashedPassword = await bcrypt.hash(req.body.userPassword, 2)
+                    const hashedPassword = await argon2.hash(req.body.userPassword);
                     try{
                         const user = {
                             userName:req.body.userName,
@@ -32,7 +34,7 @@ const bcrypt = require('bcrypt');
                         .catch(err => res.status(500).send({message:err.message || "Some error occurred while creating the User."}))
                     }
                     catch(err){
-                        console.error(error);
+                        console.error(err);
                         res.status(500).send({massage:err.massage});
                     }
                 }
@@ -83,8 +85,8 @@ const bcrypt = require('bcrypt');
 
         if(req.body.userPassword.trim() != '')  
        { 
-           const hashedPassword = await bcrypt.hash(req.body.userPassword, 2)
-            try{
+        const hashedPassword = await argon2.hash(req.body.userPassword);
+        try{
                 const user =  {
                     userName:req.body.userName ,
                     userEmail:req.body.roleEmail ,
@@ -122,24 +124,27 @@ const bcrypt = require('bcrypt');
         })
     }
 //Login
-exports.login =  (req , res) =>{
-    console.log(req.body);
-    User.findOne({where: {userEmail:req.body.email}})
-    .then(user =>  
-        {
-            console.log(user);
-            if(user)
+exports.login = (req , res ) =>{
+     User.findOne({where: {userEmail:req.body.email}})
+    .then( async user =>  
+        {        
+            if(user.dataValues.userPassword)
             {
-                bcrypt.compare(req.body.password, user.userPassword)
-                .then(data => {
-                    res.status(200).send(user)
+               await Argon2.verify(user.dataValues.userPassword , req.body.password)
+               .then(match =>{
+                    if (match) 
+                        res.status(200).send(user)
+                    else
+                        res.status(200).send("wrong password")
+               })
+               .catch((err) => {
+                    console.log(err);
+                    res.status(500).send({message:err.message})
                 })
-                .catch(err => res.status(500).send({error:err.message}))
             }
-            else{
-                res.status(200).send('Not Found')
-            }
+            else
+             res.status(200).send("Not exist password")      
         }
     )
-    .catch(err => res.status(200).send('Not Found'))
+    .catch(err => res.status(200).send("wrong password"))
  }

@@ -16,15 +16,13 @@ const Login = () => {
     const [loginMessage , setLoginMessage] = useState('')
     let navigate = useNavigate();
 
-    const checkAuto = (autoLogin) => {
+    const checkAuto = async (autoLogin) => {
         autoLogin.preventDefault()
-        axios.post(API+'users/login',{email:autoLogin.target[0].value , password:autoLogin.target[1].value})
+        await axios.post(API+'users/login',{email:autoLogin.target[0].value , password:autoLogin.target[1].value})
         .then(user => {
-            if(!user.data)
+            if(user.data === "wrong password")
            {
-            setLoginMessage('Password Worng')
-            console.log("user" , user);
-
+            setLoginMessage(user.data)
            }
            else {
             setDataUserLogged(user.data)
