@@ -34,6 +34,8 @@ const ExamPage = () => {
 
   useEffect(async ()=>{
    let answers = await AnswersByExamID(params.id)
+   console.log(answers);
+
    setExam(answers)
   },[exams])
   return (

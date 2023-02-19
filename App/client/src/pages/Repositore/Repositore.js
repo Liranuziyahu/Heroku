@@ -23,9 +23,16 @@ const Repositore = () => {
         }
     },
   }));
-  const styles= useStyles()
-
-    const [questionStructure , setquestionStructure ] = useState({
+    const styles= useStyles()
+    const CleanForm = (e) => {
+        e[0].value=''
+        e[3].value=''
+        e[4].value=''
+        e[5].value=''
+        e[6].value=''
+        e[7].value=''
+    }
+    const builderQuestion = {
         "categoryExamsID":'',
         "questionTheQuestion": "",
         "questionTrueAnswer": "",
@@ -33,7 +40,9 @@ const Repositore = () => {
         "answer2": "" ,
         "answer3": "" ,
         "answer4": "" ,
-    })
+    }
+
+    const [questionStructure , setquestionStructure ] = useState(builderQuestion)
     const [category, setCategory] = useState('JS');
     const {createQuestion} = useContext(ContextFromServer)
 
@@ -43,7 +52,9 @@ const Repositore = () => {
             <InputAddToCategory props={{setCategory ,category}}/>
             <FormControl style={{display: 'flex'}} onSubmit ={(e)=>{
                 e.preventDefault()
+                setquestionStructure(builderQuestion)
                 createQuestion(category , questionStructure)
+                CleanForm(e.target)
                 }}>
             <Form >
                     <TextField  multiline rows={3} fullWidth label="Question" id="Question" placeholder="typeing..." onChange={(e)=>setquestionStructure({...questionStructure,['questionTheQuestion']:e.target.value})}/>

@@ -16,11 +16,12 @@ const Exam = ({userExams}) => {
   const [exam , setExam] = useState([storageQuestions[theExmControl]]);
   const [storageAnswers , setStorageAnswers] = useState([])
 
-  const reload = {
-    position: 'absolute',
-    top:'calc(50% - 32px)',
-    left:'calc(50% - 32px)'
+  const examPage = {
+    display: 'flex',
+    justifyContent: 'center',
+
    }
+
 
   const ChangeQuestion = () => setTheQuestionControl(theQuestionControl + 1)
 
@@ -67,8 +68,7 @@ const Exam = ({userExams}) => {
    <>
    {
      (storageQuestions?.[theExmControl]?.questions?.length != theQuestionControl && storageQuestions.length != 0 )?
-     <div>
-       <input type='range' value={100*theQuestionControl/10}></input>
+     <div style={examPage}>
        <Question  props = {{question:question,exam:exam , ChangeQuestion , setStorageAnswers ,userExams: userExams[theExmControl]}}/>
      </div>
       :

@@ -1,4 +1,4 @@
-import React , {useState } from 'react'
+import React , {useState} from 'react'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -11,12 +11,13 @@ import { Form } from 'react-bootstrap';
 
 const Question = ({props}) => {
   const styleP = {
-    fontSize: '400px',
-    color:'red'
+    border:'1px solid black',
+    borderRadius:'15px',
+    marginTop:10,
   }
 
   function RepeatAnswer(index){
-      return <FormControlLabel value={eval(`props.question?.answer${index}`)} 
+      return <FormControlLabel style={styleP} value={eval(`props.question?.answer${index}`)} 
       key={index} control={<Radio required={true} />} label={eval(`props.question?.answer${index}`)}/>
   }
 
@@ -29,7 +30,7 @@ const Question = ({props}) => {
   }
 
   const CheckAnswer = (question , userAnswer ) =>{
-    if(question.questionTrueAnswer == userAnswer)
+    if(question.questionTrueAnswer === userAnswer)
         props.exam.score = props.exam.score + 10
   }
   

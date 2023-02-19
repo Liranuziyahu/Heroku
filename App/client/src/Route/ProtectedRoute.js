@@ -5,7 +5,6 @@ import {myContextData} from '../context/ContextDataFromServer'
 const ProtectedRoute = () => {
     const { dataUserLogged , isAuth } = useContext(myContextData)
     const isAdmin = (isAuth && dataUserLogged?.roleID =='1') || (JSON.parse(localStorage?.getItem('currentUser')))?.roleID =='1' 
-    console.log(isAdmin)
     return (
         <>   
            { isAdmin ? <Outlet></Outlet> : <Navigate to="User"/> } 
